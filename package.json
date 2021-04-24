@@ -1,0 +1,30 @@
+{
+  "name": "ulset-web-exam",
+  "version": "1.0.0",
+  "description": "Web exam spring 2021",
+  "scripts": {
+    "start": "concurrently npm:start-parcel npm:start-server\"",
+    "start-parcel": "parcel watch src/client/index.html",
+    "start-server": "nodemon --watch src/server src/server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ulset/web-exam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ulset/web-exam/issues"
+  },
+  "homepage": "https://github.com/Ulset/web-exam#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2",
+    "nodemon": "^2.0.7",
+    "parcel": "^2.0.0-beta.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
