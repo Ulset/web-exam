@@ -16,5 +16,5 @@ app.get("/test", (req, res)=>{
 
 const port = 8000
 app.listen(port, ()=>{
-    console.log("El server estoy livoooooo")
+    console.log(`Server live på port: ${port}`)
 })

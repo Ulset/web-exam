@@ -4,7 +4,7 @@
   "description": "Web exam spring 2021",
   "scripts": {
     "start": "concurrently npm:start-parcel npm:start-server\"",
-    "start-parcel": "parcel watch src/client/index.html",
+    "start-parcel": "parcel src/client/index.html",
     "start-server": "nodemon --watch src/server src/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
