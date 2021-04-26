@@ -9,4 +9,14 @@ userApi.get("", ((req, res) => {
     res.json(users)
 }))
 
+userApi.post("", ((req, res) => {
+    const {firstname, lastname, email} = req.body
+    users.push({
+        id: users.length+1,
+        firstname,
+        lastname,
+        email
+    })
+    res.status(201)
+}))
 module.exports = userApi

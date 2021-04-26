@@ -3,12 +3,31 @@ import {Route, Switch} from "react-router";
 import NewUser from "./new_user/new_user";
 import React from "react";
 
+const userApi = {
+    listUsers: async () => {
+        let resp = await fetch("/api/users");
+        return await resp.json()
+    },
+    createNewUser: (userObj) => {
+        fetch("/api/users", {
+            method: "POST",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(r => {
+            if(r.statusCode !== 201){
+                throw new Error("klarte ikke oprette")
+            }
+        })
+    }
+}
+
 export const App = ({userToken}) => {
-    if(!userToken){
+    if (!userToken) {
         const history = useHistory()
         history.push("/login")
     }
-
 
 
     return <div>
@@ -23,7 +42,7 @@ export const App = ({userToken}) => {
                 <Link to={'/new_user'}><p>Ny bruker</p></Link>
             </Route>
             <Route path={'/new_user'}>
-                <NewUser/>
+                <NewUser userApi={userApi}/>
             </Route>
         </Switch>
     </div>

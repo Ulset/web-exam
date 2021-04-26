@@ -9,7 +9,6 @@ const app = express();
 //Setup app
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 app.use("/api/users", userApi)
 
