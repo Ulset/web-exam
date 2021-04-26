@@ -33,7 +33,6 @@ export function useLoading(callbackFunc, deps = []) {
     return {error, loading, data, reload};
 }
 
-
 export function InputField({onChangeValue, value, type = "text", placeholder}) {
     return (
         <div>

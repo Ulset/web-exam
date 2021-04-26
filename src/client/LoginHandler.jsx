@@ -25,8 +25,10 @@ const LoginHandler = ({setUserToken}) => {
         //If user has already logged inn, parse the supplied userdata
         const hash = Object.fromEntries(new URLSearchParams(window.location.hash.substr(1)));
         const {access_token} = hash
-        if(access_token){
-            useEffect(()=>{setUserToken(access_token)})
+        const access_token_formatted = `Bearer ${access_token}`
+        if(hash){
+            useEffect(()=>{setUserToken(access_token_formatted)})
+            console.log("done")
             const history = useHistory();
             history.push("/")
         }
