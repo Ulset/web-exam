@@ -1,11 +1,8 @@
 import React, {useEffect} from "react";
-import {fetchJson} from "./helpers";
+import {fetchJson, google_ident} from "./helpers";
 import {useHistory} from "react-router";import {Link} from "react-router-dom";
 
-const google_ident = {
-    discoveryURL: "https://accounts.google.com/.well-known/openid-configuration",
-    clientId: "53213695995-hv7g2v86afjaepuacln2go95fjul7hko.apps.googleusercontent.com"
-}
+
 
 async function redirect_to_google_login() {
     const {discoveryURL, clientId} = google_ident;
