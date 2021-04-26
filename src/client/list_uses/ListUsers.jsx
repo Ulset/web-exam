@@ -20,7 +20,7 @@ const ListUsers = ({userApi}) => {
         <div>{users ?
             users
             : <p>Laster..</p>}</div>
-        {users && users.length === 1 ? <p>Det er bare en bruker her, venligst logg inn med en ekstra Google konto :)</p> : ''}
+        {users && users.length === 1 ? <p>Det er bare en bruker her, trenger to for å chatte! :)</p> : ''}
 
     </div>
 }

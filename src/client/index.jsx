@@ -20,7 +20,9 @@ function Index({userApi}){
     const [userToken, setUserToken] = useState();
     const [userData, setUserData] = useState()
     const loadProfile = async ()=>{
-        userApi.getProfileData(userToken).then(uJson => {setUserData(uJson)})
+        if(!userData && userToken){
+            userApi.getProfileData(userToken).then(uJson => {setUserData(uJson)})
+        }
     }
     useEffect(()=>{loadProfile()}, [userToken])
 
