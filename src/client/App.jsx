@@ -11,6 +11,13 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
         history.push("/login")
     }
 
+    if(!userData){
+        //Hvis serveren bruker litt tid på å hente brukerdata, så vis en melding. Så ikke React kræsjer.
+        return <div>
+            <p>Laster brukerdata, vent litt</p>
+        </div>
+    }
+
     return <div>
         <h1>Cool chat app</h1>
         <Link to={'/'}><p>Hjem</p></Link>

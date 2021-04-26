@@ -31,15 +31,12 @@ const messageApi = {
 function Index({userApi, messageApi}) {
     const [userToken, setUserToken] = useState();
     const [userData, setUserData] = useState()
-    const loadProfile = async () => {
+    useEffect(() => {
         if (!userData && userToken) {
             userApi.getProfileData(userToken).then(uJson => {
                 setUserData(uJson)
             })
         }
-    }
-    useEffect(() => {
-        loadProfile()
     }, [userToken])
 
     return <div>

@@ -9,7 +9,7 @@ let messages = []
 messageApi.post("", ((req, res) => {
     messages.push(req.body)
     console.log(messages)
-    res.status(201).json({"test": "hei"})
+    res.status(201).send()
 }))
 
 
