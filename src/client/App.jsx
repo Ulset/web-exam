@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router";
 import UserList from "./list_uses/ListUsers";
 import React from "react";
 import NewMessage from "./new_message/NewMessage";
+import MyMessages from "./my_messages/MyMessages";
 
 export const App = ({userToken, userData, userApi, messageApi}) => {
     if (!userToken) {
@@ -36,6 +37,9 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
             </Route>
             <Route path={'/new_message'}>
                 <NewMessage userApi={userApi} messageApi={messageApi} userData={userData}/>
+            </Route>
+            <Route path={'/my_messages'}>
+                <MyMessages />
             </Route>
         </Switch>
     </div>

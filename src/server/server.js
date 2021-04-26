@@ -4,15 +4,19 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const userApi = require("./userApi")
 const messageApi = require("./messageApi")
-
 const app = express();
 
 //Setup app
-app.use(cors());
+app.use((req, res, next) => {
+    console.log(`Incoming ${req.protocol}, type ${req.method}, to ${req.path}`)
+    next()
+})
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 app.use("/api/users", userApi)
 app.use("/api/message", messageApi)
+
+
 
 //Since im not using the server part of parcel(just the bundling) i need to be able to serve the files.
 app.use((req, res, next)=>{
@@ -23,8 +27,10 @@ app.use((req, res, next)=>{
     return res.sendFile(path.resolve(__dirname, "..", "..", "dist", "index.html"))
 })
 
-
 const port = 3000
-app.listen(port, ()=>{
+const server = app.listen(port, ()=>{
     console.log(`Server live på port: ${port}`)
+    server.on("upgrade", (req, res, head) => {
+        messageApi.handleWsUpgrade(req, res, head)
+    })
 })

@@ -17,11 +17,11 @@ async function redirect_to_google_login() {
 }
 
 const LoginHandler = ({setUserToken}) => {
-    /*Login handler handles everything. If a hash is used in the request, will set this hash to the current access token
+    /*Login handler handles everything log in related. If a hash is used in the request, will set this hash to the current access token
     * index.jsx will send this over to the server for the actual log in process */
 
     if (window.location.href.includes("#")) {
-        //If user has already logged inn, parse the supplied userdata
+        //If hash is found in URL, parse this to a userToken
         const hash = Object.fromEntries(new URLSearchParams(window.location.hash.substr(1)));
         const {access_token} = hash
         const access_token_formatted = `Bearer ${access_token}`
