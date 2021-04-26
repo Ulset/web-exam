@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import ReactDom from 'react-dom'
-import {Route, Switch, useHistory} from "react-router";
+import {Route, Switch} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import LoginHandler from "./LoginHandler";
 import {App} from "./App";
@@ -29,9 +29,12 @@ const messageApi = {
 }
 
 function Index({userApi, messageApi}) {
+    /*The top level of this react app*/
+
     const [userToken, setUserToken] = useState();
     const [userData, setUserData] = useState()
     useEffect(() => {
+        //If a user token is supplied but no userData is available, ask server who this person is.
         if (!userData && userToken) {
             userApi.getProfileData(userToken).then(uJson => {
                 setUserData(uJson)
@@ -39,6 +42,7 @@ function Index({userApi, messageApi}) {
         }
     }, [userToken])
 
+    //Main return statement. App component will automatically redirect to /login if no userToken is supplied.
     return <div>
         <BrowserRouter>
             <Switch>

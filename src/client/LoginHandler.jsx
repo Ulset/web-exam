@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {fetchJson} from "./helpers";
-import {useHistory} from "react-router";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router";import {Link} from "react-router-dom";
 
 const google_ident = {
     discoveryURL: "https://accounts.google.com/.well-known/openid-configuration",
@@ -21,6 +20,9 @@ async function redirect_to_google_login() {
 }
 
 const LoginHandler = ({setUserToken}) => {
+    /*Login handler handles everything. If a hash is used in the request, will set this hash to the current access token
+    * index.jsx will send this over to the server for the actual log in process */
+
     if (window.location.href.includes("#")) {
         //If user has already logged inn, parse the supplied userdata
         const hash = Object.fromEntries(new URLSearchParams(window.location.hash.substr(1)));
@@ -28,7 +30,6 @@ const LoginHandler = ({setUserToken}) => {
         const access_token_formatted = `Bearer ${access_token}`
         if(hash){
             useEffect(()=>{setUserToken(access_token_formatted)})
-            console.log("done")
             const history = useHistory();
             history.push("/")
         }

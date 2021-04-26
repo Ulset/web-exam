@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react'
-import {InputField} from "../helpers";
+import React, {useState} from 'react'
 
-const ListUsers = ({userApi}) => {
+const ListUsers = ({userApi, userData}) => {
     let [users, setUsers] = useState()
+    const selfId = userData.id //The id of the currently logged in user.
     if(!users){
+        /*If there are no loaded users, load from server*/
         userApi.listUsers().then(
             d => {
                 let usersHtml = d.map(u => {
                     let {id, firstname, lastname, email} = u
-                    return <div key={id}>{firstname} {lastname}, {email}</div>
+                    return <div key={id}>{firstname} {lastname}, {email}{selfId===id ? ' (megselv)' : ''}</div>
                 })
                 setUsers(usersHtml)
             }
         )
     }
 
+    //Return statement, will tell you if you have no friends
     return <div>
         <h4>Eksisterende brukere</h4>
         <div>{users ?

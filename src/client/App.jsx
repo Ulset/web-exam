@@ -12,16 +12,18 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
     }
 
     if(!userData){
-        //Hvis serveren bruker litt tid på å hente brukerdata, så vis en melding. Så ikke React kræsjer.
+        //If the userdata is still loading, display a message. This prevents components that
+        // are dependent on userData to crash on reload.
         return <div>
             <p>Laster brukerdata, vent litt</p>
         </div>
     }
 
+    //Main return statement, this is where the magic starts :P
     return <div>
         <h1>Cool chat app</h1>
         <Link to={'/'}><p>Hjem</p></Link>
-        {userData ? <p>Logget inn som {userData.firstname}</p> : ''}
+        <p>Logget inn som {userData.firstname} {userData.lastname}</p>
         <br/>
         <Switch>
             <Route exact path={'/'}>
@@ -30,7 +32,7 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
                 <Link to={'/list_users'}><p>Liste over brukere</p></Link>
             </Route>
             <Route path={'/list_users'}>
-                <UserList userApi={userApi}/>
+                <UserList userApi={userApi} userData={userData}/>
             </Route>
             <Route path={'/new_message'}>
                 <NewMessage userApi={userApi} messageApi={messageApi} userData={userData}/>

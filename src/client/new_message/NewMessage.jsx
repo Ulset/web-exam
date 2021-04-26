@@ -2,14 +2,15 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
 const NewMessage = ({userApi, messageApi, userData}) => {
-    const [messageIsCreated, setMessageIsCreated] = useState(false) //For at brukeren skal få tilbakemelding om tråden ble laget eller ikke
+    const [messageIsCreated, setMessageIsCreated] = useState(false) //For feedback if the message was sent or not
     const [error, setError] = useState(false) //If something goes wrong, let the user know
-    const [recipients, setRecipient] = useState([]) //Alle tilgjenglige mottakere
-    const [message, setMessage] = useState("") //Selve meldingen som skal bli sendt
-    const [selectedRecipient, setSelectedRecipient] = useState(0) //Hvilken mottaker som er valgt akkurat nå
+    const [recipients, setRecipient] = useState([]) //Every user that has ever logged in (since serverstart)
+    const [message, setMessage] = useState("") //Message to be composed and sent
+    const [selectedRecipient, setSelectedRecipient] = useState(0) //Which recipient is currently selected.
     const {id} = userData
     userApi.listUsers().then(d => setRecipient(d))
 
+    //Loops over the recipients and makes HTML options out of them
     let available_recipients_options = recipients.map(r => {
         return <option value={r.id} key={r.id}>{`${r.firstname} ${r.lastname}`}</option>
     })
@@ -18,9 +19,10 @@ const NewMessage = ({userApi, messageApi, userData}) => {
         //Sends the message to the client
         const resp = await messageApi.send_new_message(id, selectedRecipient, message)
         if(resp.status === 201){
+            //If server return status code 201 'Created', display a cheerfull message to the user.
             setMessageIsCreated(true)
         }else{
-            console.log("setter error")
+            //If not, display error :(
             setError(true)
         }
     }
@@ -31,8 +33,9 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     }
 
     if(messageIsCreated){
+        //Message is created text
         return <div>
-            <p>Tråden ble oprettet!</p>
+            <p>Tråden ble oprettet! Jippi!</p>
             <Link to={'/my_messages'}>Mine meldinger</Link>
             <br/><br/>
             <button onClick={reset_component}>Lag enda en tråd</button>
@@ -40,11 +43,14 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     }
 
     if(error){
+        //Error text
         return <div>
             <p>Wooooooooooooops! Der skjedde det noe feil når meldingen skulle bli sendt:(</p>
         </div>
     }
 
+
+    //Main return statement to compose and send a message to a selected recipient.
     return <div>
         <h2>Ny melding</h2>
         <p>Meldinger oprettet her vil starte en ny tråd i 'Mine meldinger' som er live.</p>
