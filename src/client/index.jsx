@@ -17,14 +17,14 @@ const userApi = {
 }
 
 const messageApi = {
-    create_new_message: async (senderId, recipientId, message) => {
-        const response = await fetch("/api/message", {
+    send_new_message: async (senderId, recipientId, message) => {
+        return await fetch("/api/message", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({senderId, recipientId, message}),
-        });
+        })
     }
 }
 

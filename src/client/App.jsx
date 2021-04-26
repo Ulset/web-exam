@@ -26,7 +26,7 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
                 <UserList userApi={userApi}/>
             </Route>
             <Route path={'/new_message'}>
-                <NewMessage userApi={userApi} messageApi={messageApi}/>
+                <NewMessage userApi={userApi} messageApi={messageApi} userData={userData}/>
             </Route>
         </Switch>
     </div>

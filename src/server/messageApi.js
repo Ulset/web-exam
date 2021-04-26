@@ -3,7 +3,14 @@ let messageApi = express.Router()
 const fetch = require('node-fetch')
 
 
-messageApi.post("", )
+//Populated by incoming messages
+let messages = []
+
+messageApi.post("", ((req, res) => {
+    messages.push(req.body)
+    console.log(messages)
+    res.status(201).json({"test": "hei"})
+}))
 
 
 
