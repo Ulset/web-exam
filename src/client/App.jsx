@@ -2,9 +2,11 @@ import {Link, useHistory} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import UserList from "./list_uses/ListUsers";
 import React from "react";
+import NewMessage from "./new_message/NewMessage";
 
-export const App = ({userToken, userData, userApi}) => {
+export const App = ({userToken, userData, userApi, messageApi}) => {
     if (!userToken) {
+        //If the user isnt logged in, force to the log in page.
         const history = useHistory()
         history.push("/login")
     }
@@ -22,6 +24,9 @@ export const App = ({userToken, userData, userApi}) => {
             </Route>
             <Route path={'/list_users'}>
                 <UserList userApi={userApi}/>
+            </Route>
+            <Route path={'/new_message'}>
+                <NewMessage userApi={userApi} messageApi={messageApi}/>
             </Route>
         </Switch>
     </div>

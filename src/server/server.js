@@ -3,6 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const userApi = require("./userApi")
+const messageApi = require("./messageApi")
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 app.use("/api/users", userApi)
+app.use("/api/message", messageApi)
 
 //Since im not using the server part of parcel(just the bundling) i need to be able to serve the files.
 app.use((req, res, next)=>{
@@ -18,7 +20,6 @@ app.use((req, res, next)=>{
         return next();
     }
     //Since im going to use React router, should return index.html on every endpoint except '/api'
-
     return res.sendFile(path.resolve(__dirname, "..", "..", "dist", "index.html"))
 })
 
