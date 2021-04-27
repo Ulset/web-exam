@@ -24,7 +24,7 @@ function Application({userApi, messageApi}) {
                 if (data === "Switch token") {
                     //Too little time to do this better, a Google token only lasts for 1 hour, so need to switch sometimes
                     localStorage.clear()
-                    window.location.reload()
+                    setUserToken("")
                 } else {
                     setUserData(data)
                 }
@@ -35,19 +35,18 @@ function Application({userApi, messageApi}) {
             localStorage.setItem("userToken", userToken)
         }
     }, [userToken])
-    //Main return statement. App component will automatically redirect to /login if no userToken is supplied.
-    return <div>
-        <BrowserRouter>
-            <Switch>
-                <Route path={'/login'}>
-                    <LoginHandler setUserToken={setUserToken} userToken={userToken}/>
-                </Route>
-                <Route>
-                    <App userToken={userToken} userApi={userApi} messageApi={messageApi} userData={userData}/>
-                </Route>
-            </Switch>
+
+    //Main return statement. Split up since Jest testing doesnt handle useHistory very well.
+    // LoginHandler will change url to '/' when it gets a userToken from the user.
+    if(userToken){
+        return <BrowserRouter>
+            <App userToken={userToken} userApi={userApi} messageApi={messageApi} userData={userData}/>
         </BrowserRouter>
-    </div>
+    }else {
+        return <BrowserRouter>
+            <LoginHandler setUserToken={setUserToken} userToken={userToken}/>
+        </BrowserRouter>
+    }
 }
 
 export default Application

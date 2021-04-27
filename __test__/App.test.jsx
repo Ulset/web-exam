@@ -30,5 +30,4 @@ describe("Test App component", ()=>{
         expect(container.innerHTML).toMatchSnapshot();
         expect(container.querySelector("p").innerHTML).toEqual("Laster brukerdata, vent litt")
     })
-
 })

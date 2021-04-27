@@ -6,7 +6,8 @@ import {useHistory} from "react-router";
 
 async function redirect_to_google_login() {
     const {discoveryURL, clientId} = google_ident;
-    const {authorization_endpoint} = await fetchJson(discoveryURL)
+    const endpoint_resp = await fetch(discoveryURL)
+    const {authorization_endpoint} = await endpoint_resp.json()
     const params = {
         client_id: clientId,
         response_type: "token",

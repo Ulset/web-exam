@@ -18,9 +18,20 @@ it("Should tell user they need to log in", async ()=>{
 it("Should show frontpage", async ()=>{
     const container = document.createElement("div")
     localStorage.setItem("userToken", "Bearer fakeTokenYolo")
-    console.log(localStorage.getItem("userToken"))
     document.body.appendChild(container)
     await act(async ()=>{
         ReactDOM.render(<Application userApi={userApi}/>, container)
     })
+    expect(container.innerHTML).toContain("Logget inn som")
+})
+
+it("Should delete token from storage", async()=>{
+    const container = document.createElement("div")
+    localStorage.setItem("userToken", "Bearer fakeTokenYolo")
+    userApi.getProfileData = async () => {return "Switch token"}
+    document.body.appendChild(container)
+    await act(async ()=>{
+        ReactDOM.render(<Application userApi={userApi}/>, container)
+    })
+    expect(localStorage.getItem("userToken")).toBeNull()
 })

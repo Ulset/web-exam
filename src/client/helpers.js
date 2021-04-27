@@ -6,14 +6,5 @@ const google_ident = {
     clientId: "53213695995-hv7g2v86afjaepuacln2go95fjul7hko.apps.googleusercontent.com"
 }
 
-//Kopiert fra forelesningen til johannes
-async function fetchJson(url) {
-    const res = await fetch(url);
-    if (!res.ok) {
-        throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-    }
-    return await res.json();
-}
 
-
-module.exports = {fetchJson, google_ident}
+module.exports = {google_ident}

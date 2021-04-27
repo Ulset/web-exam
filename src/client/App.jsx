@@ -6,13 +6,6 @@ import NewMessage from "./new_message/NewMessage";
 import MyMessages from "./my_messages/MyMessages";
 
 export const App = ({userToken, userData, userApi, messageApi}) => {
-    if (!userToken) {
-        //If the user isnt logged in, force to the log in page.
-        //TODO Add some server authentication if i got the time.
-        const history = useHistory()
-        history.push("/login")
-    }
-
     if(!userData){
         //If the userdata is still loading, display a message. This prevents components that
         // are dependent on userData to crash on reload.
