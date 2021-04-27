@@ -40,7 +40,7 @@ const NewMessage = ({userApi, messageApi, userData}) => {
         //Message is created text
         return <div>
             <p>Privat melding sendt! Jippi!</p>
-            <Link to={'/my_messages'}>Mine meldinger</Link>
+            <Link to={'/my_messages'}>Gå til chatten</Link>
             <br/><br/>
             <button onClick={reset_component}>Send ny privat melding</button>
         </div>

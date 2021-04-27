@@ -12,6 +12,9 @@ const userApi = {
     },
     getProfileData: async (userToken) => {
         let resp = await fetch("/api/users/profile/" + userToken)
+        if(resp.status === 401){
+            return "Switch token";
+        }
         return await resp.json()
     }
 }
@@ -48,8 +51,14 @@ function Index({userApi, messageApi}) {
     useEffect(() => {
         //If a user token is supplied but no userData is available, ask server who this person is.
         if (!userData && userToken) {
-            userApi.getProfileData(userToken).then(uJson => {
-                setUserData(uJson)
+            userApi.getProfileData(userToken).then(data => {
+                if(data === "Switch token"){
+                    //Too little time to do this better, a Google token only lasts for 1 hour, so need to switch sometimes
+                    localStorage.clear()
+                    window.location.reload()
+                }else{
+                    setUserData(data)
+                }
             })
         }
         if(userToken){

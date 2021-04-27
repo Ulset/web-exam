@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {fetchJson, google_ident} from "./helpers";
-import {useHistory} from "react-router";import {Link} from "react-router-dom";
+import {useHistory} from "react-router";
 
 
 
@@ -16,7 +16,7 @@ async function redirect_to_google_login() {
     window.location.href = authorization_endpoint + "?" + new URLSearchParams(params);
 }
 
-const LoginHandler = ({setUserToken, userToken}) => {
+const LoginHandler = ({setUserToken}) => {
     /*Login handler handles everything log in related. If a hash is used in the request, will set this hash to the current access token
     * index.jsx will send this over to the server for the actual log in process */
 
