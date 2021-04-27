@@ -8,6 +8,7 @@ import MyMessages from "./my_messages/MyMessages";
 export const App = ({userToken, userData, userApi, messageApi}) => {
     if (!userToken) {
         //If the user isnt logged in, force to the log in page.
+        //TODO Add some server authentication if i got the time.
         const history = useHistory()
         history.push("/login")
     }
@@ -28,18 +29,18 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
         <br/>
         <Switch>
             <Route exact path={'/'}>
-                <Link to={'/new_message'}><p>Ny melding</p></Link>
-                <Link to={'/my_messages'}><p>Mine meldinger</p></Link>
+                <Link to={'/private_message'}><p>Ny privat melding</p></Link>
+                <Link to={'/my_messages'}><p>Chat</p></Link>
                 <Link to={'/list_users'}><p>Liste over brukere</p></Link>
             </Route>
             <Route path={'/list_users'}>
                 <UserList userApi={userApi} userData={userData}/>
             </Route>
-            <Route path={'/new_message'}>
+            <Route path={'/private_message'}>
                 <NewMessage userApi={userApi} messageApi={messageApi} userData={userData}/>
             </Route>
             <Route path={'/my_messages'}>
-                <MyMessages />
+                <MyMessages messagesApi={messageApi} userData={userData}/>
             </Route>
         </Switch>
     </div>

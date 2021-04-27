@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
 
 const NewMessage = ({userApi, messageApi, userData}) => {
@@ -8,7 +8,10 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     const [message, setMessage] = useState("") //Message to be composed and sent
     const [selectedRecipient, setSelectedRecipient] = useState(0) //Which recipient is currently selected.
     const {id} = userData
-    userApi.listUsers().then(d => setRecipient(d))
+    useEffect(()=>{
+        //Only need to get this once, or if the user changes
+        userApi.listUsers().then(d => setRecipient(d))
+    }, [userData])
 
     //Loops over the recipients and makes HTML options out of them
     let available_recipients_options = recipients.map(r => {

@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 app.use("/api/users", userApi)
-app.use("/api/message", messageApi)
+app.use("/api/messages", messageApi)
 
 
 

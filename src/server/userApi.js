@@ -14,33 +14,32 @@ async function fetchJson(url, options) {
 let users = [
     {"id": 1, "firstname": "Testmann", "lastname": "Testmannson", "email": "sanderulset@gmail.com"}
 ]
-const get_user_obj = (email) =>{
-    let index = users.map(el => el.email).indexOf(email)
-    return users[index]
-}
 
+//Helper functions used locally.
+const getUserObjByEmail = email => users.find((el) => el.email === email)
+const getUserObjById = id => users.find(el => el.id === id)
+
+//Empty get request to the path ('/api/users') will return the whole user object.
 userApi.get("", ((req, res) => {
     res.json(users)
 }))
 
+//Returns profile info by the supplied Google token.
 userApi.get("/profile/:auth_token", async (req, res) => {
     const a_token = req.params.auth_token;
     const {userinfo_endpoint} = await fetchJson("https://accounts.google.com/.well-known/openid-configuration")
     const {given_name, family_name, email} = await fetchJson(userinfo_endpoint, {headers: {Authorization: a_token}})
 
-    //If the user is not in the DB, add
-    let exists_in_db = false;
-    for(let el of users){
-        if(el.firstname === given_name && el.lastname === family_name && el.email === email){
-            exists_in_db = true;
-        }
-    }
+    //If the user is not in the DB, add to list of users.
+    let exists_in_db = users.find(el => {
+        return el.firstname === given_name && el.lastname === family_name && el.email === email
+    });
     if(!exists_in_db){
         users.push({"id": users.length+1, "firstname": given_name, "lastname":family_name, email})
     }
 
     //To keep things organized need to return the whole user object. (So ID and stuff like that is also sent)
-    res.status(200).json(get_user_obj(email))
+    res.status(200).json(getUserObjByEmail(email))
 })
 
 
