@@ -9,7 +9,7 @@ const ListUsers = ({userApi, userData}) => {
             d => {
                 let usersHtml = d.map(u => {
                     let {id, firstname, lastname, email} = u
-                    return <div key={id}>{firstname} {lastname}, {email}{selfId===id ? ' (deg)' : ''}</div>
+                    return <li key={id}><p>{firstname} {lastname}, {email}{selfId===id ? ' (deg)' : ''}</p></li>
                 })
                 setUsers(usersHtml)
             }
@@ -18,9 +18,9 @@ const ListUsers = ({userApi, userData}) => {
     //Return statement, will tell you if you have no friends
     return <div>
         <h4>Eksisterende brukere</h4>
-        <div>{users ?
+        <ul>{users ?
             users
-            : <p>Laster..</p>}</div>
+            : <p>Laster..</p>}</ul>
         {users && users.length === 1 ? <p>Det er visst bare deg her! Trenger to for å chatte! :)</p> : ''}
     </div>
 }

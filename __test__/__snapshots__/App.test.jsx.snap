@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test App component Shows currently logged in user 1`] = `"<div><h1>Cool chat app</h1><a href=\\"/\\"><p>Hjem</p></a><p>Logget inn som Sander Ulset</p><br><br><a href=\\"/private_message\\"><p>Ny privat melding</p></a><a href=\\"/my_messages\\"><p>Chat</p></a><a href=\\"/list_users\\"><p>Liste over brukere</p></a></div>"`;
+exports[`Test App component Shows currently logged in user 1`] = `"<div class=\\"main_app\\"><h1>Cool chat app</h1><a href=\\"/\\"><p>Hjem</p></a><p>Logget inn som Sander Ulset</p><br><br><a href=\\"/private_message\\"><p>Ny privat melding</p></a><a href=\\"/my_messages\\"><p>Chat</p></a><a href=\\"/list_users\\"><p>Liste over brukere</p></a></div>"`;
 
 exports[`Test App component Shows waiting for userdata screen 1`] = `"<div><p>Laster brukerdata, vent litt</p></div>"`;

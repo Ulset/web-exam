@@ -3,7 +3,7 @@ import {act} from "react-dom/test-utils";
 import React from "react";
 import ReactDOM from "react-dom";
 import {userApi, userData, users, messageApi} from "./testHelpers";
-import NewMessage from "../src/client/new_message/NewMessage";
+import NewMessage from "../src/client/NewMessage";
 import {Simulate} from "react-dom/cjs/react-dom-test-utils.production.min";
 
 it("Can select users to send to", async ()=>{

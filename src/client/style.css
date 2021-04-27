@@ -1,0 +1,28 @@
+body {
+    background-color: #EFEFEF;
+}
+
+.main_app {
+    width: 500px;
+    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    padding: 10px;
+    margin: 50px auto auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.chat {
+    height: 250px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 40px;
+    grid-template-columns: 1fr auto;
+}
+
+.chat > div {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}

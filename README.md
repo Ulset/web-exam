@@ -23,7 +23,7 @@ Done!
 - In memory DB.
 
 # Test coverage
-My tests covers 65% of the code. The coverage could have been higher, but i couldn't get test involving WebSockets to work 
+My tests covers 64% of the code. The coverage could have been higher, but i couldn't get test involving WebSockets to work 
 correctly.
 
 # Good testruns to see all functionality

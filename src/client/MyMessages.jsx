@@ -28,7 +28,6 @@ const MyMessages = ({messagesApi, userData}) => {
 
         newWs.onmessage = e => {
             const dataParsed = JSON.parse(e.data)
-            console.log(dataParsed)
             setMessages(messages => [...messages, dataParsed])
         }
         setWs(newWs)
@@ -37,17 +36,24 @@ const MyMessages = ({messagesApi, userData}) => {
     const send_new_message = ()=>{
         const data = {message:newMessage, id, firstname, lastname}
         ws.send(JSON.stringify(data))
+        setNewMessage("")
+    }
+
+    const handle_chat_key_down = (e) => {
+        if(e.key === "Enter"){
+            send_new_message()
+        }
     }
 
     const message_log = messages.map((el, i) => {
         const {firstname, lastname, message, private_message} = el
         return <p key={i}>{firstname} {lastname} {private_message ? '(privat)' : ''}: {message}</p>
     })
-    return <div>
+    return <div className={'chat'}>
         <div>
             {message_log}
         </div>
-        <input type="text" value={newMessage} onChange={event => setNewMessage(event.target.value)}/>
+        <input type="text" value={newMessage} onChange={event => setNewMessage(event.target.value)} onKeyDown={handle_chat_key_down}/>
         <button onClick={send_new_message}>Send</button>
     </div>
 }

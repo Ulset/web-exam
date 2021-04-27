@@ -2,7 +2,7 @@ import {act} from "react-dom/test-utils";
 import React from "react";
 import ReactDOM from "react-dom";
 import {userApi, userData, users} from "./testHelpers";
-import ListUsers from "../src/client/list_uses/ListUsers";
+import ListUsers from "../src/client/ListUsers";
 import {it} from "@jest/globals";
 
 it("Lists users", async ()=>{

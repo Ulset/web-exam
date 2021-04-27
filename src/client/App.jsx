@@ -1,11 +1,11 @@
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Route, Switch} from "react-router";
-import UserList from "./list_uses/ListUsers";
+import UserList from "./ListUsers";
 import React from "react";
-import NewMessage from "./new_message/NewMessage";
-import MyMessages from "./my_messages/MyMessages";
+import NewMessage from "./NewMessage";
+import MyMessages from "./MyMessages";
 
-export const App = ({userToken, userData, userApi, messageApi}) => {
+export const App = ({userData, userApi, messageApi}) => {
     if(!userData){
         //If the userdata is still loading, display a message. This prevents components that
         // are dependent on userData to crash on reload.
@@ -15,7 +15,7 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
     }
 
     //Main return statement, this is where the magic starts :P
-    return <div>
+    return <div className={'main_app'}>
         <h1>Cool chat app</h1>
         <Link to={'/'}><p>Hjem</p></Link>
         <p>Logget inn som {userData.firstname} {userData.lastname}</p>
