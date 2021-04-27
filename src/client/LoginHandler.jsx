@@ -1,26 +1,10 @@
 import React, {useEffect} from "react";
-import {fetchJson, google_ident} from "./helpers";
+import {get_google_login_url} from "./helpers";
 import {useHistory} from "react-router";
-
-
-
-async function redirect_to_google_login() {
-    const {discoveryURL, clientId} = google_ident;
-    const endpoint_resp = await fetch(discoveryURL)
-    const {authorization_endpoint} = await endpoint_resp.json()
-    const params = {
-        client_id: clientId,
-        response_type: "token",
-        scope: "openid email profile",
-        redirect_uri: window.location.origin+"/login",
-    };
-    window.location.href = authorization_endpoint + "?" + new URLSearchParams(params);
-}
 
 const LoginHandler = ({setUserToken}) => {
     /*Login handler handles everything log in related. If a hash is used in the request, will set this hash to the current access token
     * index.jsx will send this over to the server for the actual log in process */
-
     if (window.location.href.includes("#")) {
         //If hash is found in URL, parse this to a userToken
         const hash = Object.fromEntries(new URLSearchParams(window.location.hash.substr(1)));
@@ -36,7 +20,9 @@ const LoginHandler = ({setUserToken}) => {
 
     return <div>
         <h1>Du er desverre ikke logget inn!</h1>
-        <button onClick={redirect_to_google_login}>Logg inn med Google</button>
+        <button onClick={async () => {
+            window.location.href = await get_google_login_url()
+        }}>Logg inn med Google</button>
     </div>
 }
 

@@ -15,7 +15,7 @@ it("Can create a message", async ()=>{
     })
 })
 
-it("Can tell you your token is expired", async ()=>{
+it("Can tell you your token is bad", async ()=>{
     await request(app).get("/profile/jabadababadTokenYa").then(r => {
         expect(r.status).toEqual(401)
         expect(r.text).toEqual("Bad token")
