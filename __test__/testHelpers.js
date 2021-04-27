@@ -8,7 +8,7 @@ let messages = []
 
 const userApi = {
     listUsers: async () => {return users},
-    getProfileData: async (userToken) => {}
+    getProfileData: async (userToken) => {return users[0]}
 }
 
 const messageApi = {
