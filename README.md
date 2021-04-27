@@ -45,5 +45,5 @@ is the best approach.
 #### 4. Testing in memory DB.
 * Do test 3.
 * Navigate around the page, reload, or close the window entirely.
-* Navigate back to the `Chat` and `Liste over brukere` pages(you may need to log in again.)
+* Navigate back to the `Chat` and `Liste over brukere` pages.
 * Observe how the data is still in memory (as long as the server hasn't reloaded)
