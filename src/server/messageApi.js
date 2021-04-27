@@ -22,11 +22,20 @@ const add_to_db = ({senderId, recipientId, message, private_message}) =>{
 
 messageApi.post("", ((req, res) => {
     //Add a new message thread.
-    add_to_db({
-        ...req.body,
-        private_message: true
-    })
+    const {senderId, recipientId, message} = req.body
+    add_to_db({senderId, recipientId, message, private_message:true})
     res.status(201).send()
+
+    //Broadcasts the new private message to sockets that has the same ID.
+    console.log("Startet privat gjennomgang")
+    for(const socketEl of sockets){
+        const socketUserId = socketEl.id
+        const {firstname, lastname} = userApi.getUserObjById(senderId)
+        if(socketUserId === recipientId){
+            const data = JSON.stringify({firstname, lastname, message, private_message:true})
+            socketEl.socket.send(data)
+        }
+    }
 }))
 
 messageApi.get("/:id", ((req, res) => {
@@ -72,7 +81,7 @@ wsServer.on('connection', socket => {
         add_to_db({senderId: id, message, private_message: false})
         for(let socketEl of sockets){
             const {socket} = socketEl
-            const data = JSON.stringify({firstname, lastname, message, private_message:true})
+            const data = JSON.stringify({firstname, lastname, message, private_message:false})
             socket.send(data)
         }
     })

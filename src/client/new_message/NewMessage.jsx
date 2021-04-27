@@ -38,10 +38,10 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     if(messageIsCreated){
         //Message is created text
         return <div>
-            <p>Tråden ble oprettet! Jippi!</p>
+            <p>Privat melding sendt! Jippi!</p>
             <Link to={'/my_messages'}>Mine meldinger</Link>
             <br/><br/>
-            <button onClick={reset_component}>Lag enda en tråd</button>
+            <button onClick={reset_component}>Send ny privat melding</button>
         </div>
     }
 
@@ -56,7 +56,7 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     //Main return statement to compose and send a message to a selected recipient.
     return <div>
         <h2>Ny melding</h2>
-        <p>Meldinger oprettet her vil starte en ny tråd i 'Mine meldinger' som er live.</p>
+        <p>Meldinger laget her vil bare kunne bli sett av personen du sender det til. Ikke noe mobbing!</p>
         <br/>
         <label>
             Hvem vil du sende til:
