@@ -3,8 +3,8 @@ import React, {useEffect, useState} from "react";
 const MyMessages = ({messagesApi, userData}) => {
     const [ws, setWs] = useState();
     const [messages, setMessages] = useState([]);
-    console.log(messages)
-    const {id} = userData
+    const [newMessage, setNewMessage] = useState("");
+    const {id, firstname, lastname} = userData
     useEffect(async () => {
         //Only need to do the fetching and Websocket connection once.
 
@@ -21,15 +21,38 @@ const MyMessages = ({messagesApi, userData}) => {
 
         newWs.onopen = e => {
             console.log("Open", e.data)
+            //This is the actual 'connect' part of the backend, kinda janky
+            //TODO Socket.io har støtte for ish det samme ut av boksen, bytte hvis jeg har tid.
+            newWs.send("USERID "+id)
         }
 
         newWs.onmessage = e => {
-            setMessages(messages => [...messages, e.data])
+            const dataParsed = JSON.parse(e.data)
+            console.log(dataParsed)
+            setMessages(messages => [...messages, dataParsed])
         }
         setWs(newWs)
     }, [])
+
+    const mes = messages.map(el => <p>el.message</p>)
+    console.log(mes)
+
+    const send_new_message = ()=>{
+        const data = {message:newMessage, id, firstname, lastname}
+        ws.send(JSON.stringify(data))
+    }
+
+    const message_log = messages.map((el, i) => {
+        const {firstname, lastname, message} = el
+        return <p key={i}>{firstname} {lastname}: {message}</p>
+    })
+    console.log(messages)
     return <div>
-        <p>Test</p>
+        <div>
+            {message_log}
+        </div>
+        <input type="text" value={newMessage} onChange={event => setNewMessage(event.target.value)}/>
+        <button onClick={send_new_message}>Send</button>
     </div>
 }
 

@@ -15,9 +15,9 @@ let users = [
     {"id": 1, "firstname": "Testmann", "lastname": "Testmannson", "email": "sanderulset@gmail.com"}
 ]
 
-//Helper functions used locally.
-const getUserObjByEmail = email => users.find((el) => el.email === email)
-const getUserObjById = id => users.find(el => el.id === id)
+//Helper function used locally.
+userApi.getUserObjByEmail = email => users.find((el) => el.email === email)
+userApi.getUserObjById = id => users.find((el) => el.id === id)
 
 //Empty get request to the path ('/api/users') will return the whole user object.
 userApi.get("", ((req, res) => {
@@ -39,7 +39,7 @@ userApi.get("/profile/:auth_token", async (req, res) => {
     }
 
     //To keep things organized need to return the whole user object. (So ID and stuff like that is also sent)
-    res.status(200).json(getUserObjByEmail(email))
+    res.status(200).json(userApi.getUserObjByEmail(email))
 })
 
 
