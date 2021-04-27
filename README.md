@@ -19,7 +19,8 @@ Done!
 
 #Good testruns to see all functionality
 You need to have 2 Google accounts handy for testing this application. In my experience, using 2 separate incognito windows
-is the best approach.
+is the best approach.  
+
 ####1. Testing the 'Display reachable users' functionality.
 * Log in with Google account 1, this will take you to URL path `/`
 * Click the link named `Liste over brukere`
