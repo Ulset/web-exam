@@ -14,3 +14,10 @@ it("Can create a message", async ()=>{
         expect(userEmail).toContain("jeg@finnes.ikke")
     })
 })
+
+it("Can tell you your token is expired", async ()=>{
+    await request(app).get("/profile/jabadababadTokenYa").then(r => {
+        expect(r.status).toEqual(401)
+        expect(r.text).toEqual("Bad token")
+    })
+})

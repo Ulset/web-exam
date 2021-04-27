@@ -12,10 +12,7 @@ const userApi = {
 }
 
 const messageApi = {
-    send_new_message: async (senderId, recipientId, message) => {
-        messages.push({senderId, recipientId, message})
-        return {status: 201};
-    }
+
 }
 
 

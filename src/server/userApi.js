@@ -2,14 +2,6 @@ const express = require("express");
 let userApi = express.Router()
 const fetch = require('node-fetch')
 
-async function fetchJson(url, options) {
-    const res = await fetch(url, options);
-    if (!res.ok) {
-        throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-    }
-    return await res.json();
-}
-
 //Siden brukere autenfiseres i frontend, brukes 'databasen' bare for å holde styr på hvem du kan chatte med.
 let users = [
     {"id": 1, "firstname": "Testmann", "lastname": "TestPrivatMeldingson", "email": "jeg@finnes.ikke"}
@@ -34,7 +26,7 @@ userApi.get("/profile/:auth_token", async (req, res) => {
     const userinfo_res = await fetch(userinfo_endpoint, {headers: {Authorization: a_token}})
     if(userinfo_res.status === 401){
         //The token is expired and needs to be switched.
-        res.status(401).send()
+        res.status(401).send("Bad token")
         return
     }
     // noinspection JSUnresolvedFunction
