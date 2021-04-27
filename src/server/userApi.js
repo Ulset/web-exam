@@ -12,7 +12,7 @@ async function fetchJson(url, options) {
 
 //Siden brukere autenfiseres i frontend, brukes 'databasen' bare for å holde styr på hvem du kan chatte med.
 let users = [
-    {"id": 1, "firstname": "Testmann", "lastname": "Testmannson", "email": "sanderulset@gmail.com"}
+    {"id": 1, "firstname": "Testmann", "lastname": "TestPrivatMeldingson", "email": "jeg@finnes.ikke"}
 ]
 
 //Helper function used locally.

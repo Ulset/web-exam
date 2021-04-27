@@ -21,6 +21,7 @@ const NewMessage = ({userApi, messageApi, userData}) => {
     const send_message = async () => {
         //Sends the message to the client
         const resp = await messageApi.send_new_message(id, selectedRecipient, message)
+        setMessage("")
         if(resp.status === 201){
             //If server return status code 201 'Created', display a cheerfull message to the user.
             setMessageIsCreated(true)
@@ -55,7 +56,7 @@ const NewMessage = ({userApi, messageApi, userData}) => {
 
     //Main return statement to compose and send a message to a selected recipient.
     return <div>
-        <h2>Ny melding</h2>
+        <h2>Ny privat melding</h2>
         <p>Meldinger laget her vil bare kunne bli sett av personen du sender det til. Ikke noe mobbing!</p>
         <br/>
         <label>

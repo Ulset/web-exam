@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import ReactDom from 'react-dom'
-import {Route, Switch} from "react-router";
+import {Route, Switch, useHistory} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import LoginHandler from "./LoginHandler";
 import {App} from "./App";
@@ -35,8 +35,16 @@ const messageApi = {
 function Index({userApi, messageApi}) {
     /*The top level of this react app*/
 
-    const [userToken, setUserToken] = useState();
+    const [userToken, setUserToken] = useState("");
     const [userData, setUserData] = useState()
+    if(!userToken){
+        //If there is no userToken, see if one is saved in localstorage.
+        const userToken_stored = localStorage.getItem("userToken")
+        if(userToken_stored){
+            //If found, use this as userToken.
+            setUserToken(userToken_stored)
+        }
+    }
     useEffect(() => {
         //If a user token is supplied but no userData is available, ask server who this person is.
         if (!userData && userToken) {
@@ -44,14 +52,17 @@ function Index({userApi, messageApi}) {
                 setUserData(uJson)
             })
         }
+        if(userToken){
+            //Every time the userToken is changed (and is something), set this as the userToken in localstorage.
+            localStorage.setItem("userToken", userToken)
+        }
     }, [userToken])
-
     //Main return statement. App component will automatically redirect to /login if no userToken is supplied.
     return <div>
         <BrowserRouter>
             <Switch>
                 <Route path={'/login'}>
-                    <LoginHandler setUserToken={setUserToken}/>
+                    <LoginHandler setUserToken={setUserToken} userToken={userToken}/>
                 </Route>
                 <Route>
                     <App userToken={userToken} userApi={userApi} messageApi={messageApi} userData={userData}/>

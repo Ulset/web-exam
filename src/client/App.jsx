@@ -26,7 +26,7 @@ export const App = ({userToken, userData, userApi, messageApi}) => {
         <h1>Cool chat app</h1>
         <Link to={'/'}><p>Hjem</p></Link>
         <p>Logget inn som {userData.firstname} {userData.lastname}</p>
-        <br/>
+        <br/><br/>
         <Switch>
             <Route exact path={'/'}>
                 <Link to={'/private_message'}><p>Ny privat melding</p></Link>

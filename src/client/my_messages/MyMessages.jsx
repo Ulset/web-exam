@@ -34,19 +34,15 @@ const MyMessages = ({messagesApi, userData}) => {
         setWs(newWs)
     }, [])
 
-    const mes = messages.map(el => <p>el.message</p>)
-    console.log(mes)
-
     const send_new_message = ()=>{
         const data = {message:newMessage, id, firstname, lastname}
         ws.send(JSON.stringify(data))
     }
 
     const message_log = messages.map((el, i) => {
-        const {firstname, lastname, message} = el
-        return <p key={i}>{firstname} {lastname}: {message}</p>
+        const {firstname, lastname, message, private_message} = el
+        return <p key={i}>{firstname} {lastname} {private_message ? '(privat)' : ''}: {message}</p>
     })
-    console.log(messages)
     return <div>
         <div>
             {message_log}

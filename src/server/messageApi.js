@@ -17,7 +17,6 @@ const add_to_db = ({senderId, recipientId, message, private_message}) =>{
         console.log("LAGT MELDING TIL I DB UTEN ALL INFO, kan føre til undefined errorsssss")
     }
     messages.push({senderId, recipientId, message, private_message})
-    console.log(messages)
 }
 
 messageApi.post("", ((req, res) => {
@@ -27,7 +26,6 @@ messageApi.post("", ((req, res) => {
     res.status(201).send()
 
     //Broadcasts the new private message to sockets that has the same ID.
-    console.log("Startet privat gjennomgang")
     for(const socketEl of sockets){
         const socketUserId = socketEl.id
         const {firstname, lastname} = userApi.getUserObjById(senderId)
@@ -65,9 +63,7 @@ messageApi.handleWsUpgrade = (req, res, head) => {
 }
 
 wsServer.on('connection', socket => {
-    console.log("kobla til")
     socket.on("message", (data) => {
-        console.log("Client:", data)
         //The client will send over which userId is using this socket (to support private messages)
         if(data.substr(0, 6) === "USERID"){
             const socket_user_id = parseInt(data.substr(7))
