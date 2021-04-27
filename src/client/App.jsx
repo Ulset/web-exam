@@ -5,7 +5,7 @@ import React from "react";
 import NewMessage from "./NewMessage";
 import MyMessages from "./MyMessages";
 
-export const App = ({userData, userApi, messageApi}) => {
+export const App = ({userData, userApi, messageApi, logOut}) => {
     if(!userData){
         //If the userdata is still loading, display a message. This prevents components that
         // are dependent on userData to crash on reload.
@@ -19,6 +19,7 @@ export const App = ({userData, userApi, messageApi}) => {
         <h1>Cool chat app</h1>
         <Link to={'/'}><p>Hjem</p></Link>
         <p>Logget inn som {userData.firstname} {userData.lastname}</p>
+        <button onClick={logOut}>Logg ut</button>
         <br/><br/>
         <Switch>
             <Route exact path={'/'}>

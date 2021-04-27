@@ -1,9 +1,10 @@
-import {describe, it} from "@jest/globals";
+import {it} from "@jest/globals";
 import React from "react";
 import {act} from "react-dom/test-utils";
 import {userApi, userData, userToken} from "./testHelpers";
 import Application from "../src/client/Application";
 import ReactDOM from "react-dom";
+import {Simulate} from "react-dom/cjs/react-dom-test-utils.production.min";
 
 
 it("Should tell user they need to log in", async ()=>{
@@ -23,6 +24,22 @@ it("Should show frontpage", async ()=>{
         ReactDOM.render(<Application userApi={userApi}/>, container)
     })
     expect(container.innerHTML).toContain("Logget inn som")
+
+})
+
+it("Can logout", async ()=>{
+    const container = document.createElement("div")
+    localStorage.setItem("userToken", "Bearer fakeTokenYolo")
+    document.body.appendChild(container)
+    await act(async ()=>{
+        ReactDOM.render(<Application userApi={userApi}/>, container)
+    })
+    expect(container.innerHTML).toContain("Logget inn som")
+    await act(async ()=>{
+        Simulate.click(container.querySelector("button"))
+    })
+    expect(container.innerHTML).toContain("Du er desverre ikke logget inn!")
+
 })
 
 it("Should delete token from storage", async()=>{

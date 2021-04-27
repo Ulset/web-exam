@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {BrowserRouter} from "react-router-dom";
-import {Route, Switch} from "react-router";
 import LoginHandler from "./LoginHandler";
 import {App} from "./App";
 
@@ -9,6 +8,13 @@ function Application({userApi, messageApi}) {
 
     const [userToken, setUserToken] = useState("");
     const [userData, setUserData] = useState()
+
+    const logOut = ()=>{
+        localStorage.clear()
+        setUserData(undefined)
+        setUserToken("")
+    }
+
     if (!userToken) {
         //If there is no userToken, see if one is saved in localstorage.
         const userToken_stored = localStorage.getItem("userToken")
@@ -40,7 +46,12 @@ function Application({userApi, messageApi}) {
     // LoginHandler will change url to '/' when it gets a userToken from the user.
     if(userToken){
         return <BrowserRouter>
-            <App userToken={userToken} userApi={userApi} messageApi={messageApi} userData={userData}/>
+            <App
+                userToken={userToken}
+                userApi={userApi}
+                messageApi={messageApi}
+                userData={userData}
+                logOut={logOut} />
         </BrowserRouter>
     }else {
         return <BrowserRouter>
