@@ -22,11 +22,17 @@ Done!
 - Private messaging.
 - In memory DB.
 
+# Interpretation of task
+The task assignment reads `For login, you can use hardcoded usernames and passwords, allow self registration or support the use of Google or Active Directory. `
+But in one of the points it reads `A logged in use should be able to register more users in the system`
+I have interpreted this as if you have the possibility to log in with Google, and therefore add that account to the system. 
+That is enough to complete the assigment.
+
 # Test coverage
 My tests covers ish 65% of the code. The coverage could have been higher, but i couldn't get test involving WebSockets to work 
 correctly.
 
-# Good testruns to see all functionality
+# Good test-runs to see all functionality
 You need to have 2 Google accounts handy for testing this application. In my experience, using 2 separate incognito windows
 is the best approach.  
 

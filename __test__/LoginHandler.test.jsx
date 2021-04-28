@@ -4,8 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import LoginHandler from "../src/client/LoginHandler";
 import {BrowserRouter} from "react-router-dom";
-import {get_google_login_url} from "../src/client/helpers";
-const fetch = require("node-fetch")
 
 it("Should display button to log in", async ()=>{
     const container = document.createElement("div")
